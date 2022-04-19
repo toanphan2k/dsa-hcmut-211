@@ -54,6 +54,7 @@ XArrayList<int> collect(Node* root, int level){
     if(root == NULL) return;
 
     queue<Node*> nodeQueue;
+    // abc
     nodeQueue.push(root);
     while(!nodeQueue.empty()){
         level--;

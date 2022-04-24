@@ -170,15 +170,86 @@ public:
     void insert(const T &value){
         this->root = insertNode(this->root, value);
     }
-    Node* deleteNode(Node* root, T key);
-    void remove(const T& value);
+    ////////////////////////////////////
+    /////HELPING FUNCTIONS DELETION 
+    Node* minValueNode(Node* pNode){
+        Node* curr = pNode;
+        while (curr && curr->pLeft != NULL){
+            curr = curr->pLeft;
+        }
+        return curr;
+    }
+
+    Node* maxValueNode(Node* pNode){
+        Node* curr = pNode;
+        while (curr && curr->pRight != NULL){
+            curr = curr->pRight;
+        }
+        return curr;
+    }
+
+    Node* deleteNodeRec(Node* pNode, T key){
+        if(!pNode){
+            return pNode;
+        }
+
+        if(pNode->data < key){
+            pNode->pRight = deleteNodeRec(pNode->pRight, key);
+        }
+        else if(pNode->data > key){
+            pNode->pLeft = deleteNodeRec(pNode->pLeft, key);
+        }
+        else if(pNode->data == key && pNode->pLeft == NULL){
+            Node* temp = pNode->pRight;
+            free(pNode);
+            return temp;
+        }
+        else if(pNode->data == key && pNode->pRight == NULL){
+            Node* temp = pNode->pLeft;
+            free(pNode);
+            return temp;
+        }
+        else if(pNode->data == key && pNode->pRight != NULL && pNode->pLeft != NULL){
+            Node* temp = maxValueNode(pNode->pLeft);
+            pNode->data = temp->data;
+            pNode->pLeft = deleteNodeRec(pNode->pLeft, temp->data);
+        }
+
+        if (pNode == NULL){
+            return pNode;
+        }
+
+        int bf = BalanceFactor(pNode);
+        //LL Rotation
+        if(bf < LH && key < pNode->pLeft->data){
+            return LLRotation(pNode);
+        }
+        //RR Rotation
+        if(bf > RH && key >= pNode->pRight->data){
+            return RRRotation(pNode);
+        }
+        //LR Rotation
+        if(bf < LH && key >= pNode->pLeft->data){
+            return LRRotation(pNode);
+        }
+        //RL Rotation
+        if(bf > RH && key < pNode->pRight->data){
+            return RLRotation(pNode);
+        }
+        return pNode;
+    }
+
+
+    void remove(const T& value){
+        this->root = deleteNodeRec(this->root, value);
+    }
+
+    ////////////////////////////////////
     bool search(const T &value);
     void printInorderRec(Node* node);
-    bool findRec(Node* node, T i);
-    bool search(T value);
+    bool searchRec(Node* node, T i);
     void printInorder();
-
-
+    ////////////////////////////////////
     class Node
     {
     private:
@@ -195,11 +266,26 @@ public:
 };
 
 int main(){
+/*
+AVLTree<int> avl;
+int arr[] = {14,2,80,55,47,43,94,88,72,30,11,87,87,29,39};
+for (int i = 0; i < 15; i++){
+    avl.insert(arr[i]);
+}
+avl.printTreeStructure();
+avl.remove(87);
+avl.remove(80);
+avl.printTreeStructure();
+
+*/
 	
 AVLTree<int> avl;
-int arr[] = {4, 55, 55, 42, 18};
-for (int i = 0; i < 5; i++){
-    avl.insert(arr[i]);
+int arr[] = {10,52,98,32,68,92,40,13,42,63,99,100};
+for (int i = 0; i < 12; i++){
+avl.insert(arr[i]);
+}
+for(int i = 11; i >= 0; i--){
+avl.remove(arr[i]);
 }
 avl.printTreeStructure();
 

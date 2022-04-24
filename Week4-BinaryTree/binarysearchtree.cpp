@@ -70,7 +70,6 @@ public:
             root->value = temp->value;
             root->pRight = delNode(root->pRight, temp->value);
         }
-
         return root;
     }
     void add(T value){

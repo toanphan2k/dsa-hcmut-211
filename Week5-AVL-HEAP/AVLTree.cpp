@@ -221,19 +221,19 @@ public:
 
         int bf = BalanceFactor(pNode);
         //LL Rotation
-        if(bf < LH && key < pNode->pLeft->data){
+        if(bf < LH && BalanceFactor(root->pLeft) <= EH){
             return LLRotation(pNode);
         }
         //RR Rotation
-        if(bf > RH && key >= pNode->pRight->data){
+        if(bf > RH && BalanceFactor(root->pLeft) >= EH){
             return RRRotation(pNode);
         }
         //LR Rotation
-        if(bf < LH && key >= pNode->pLeft->data){
+        if(bf < LH && BalanceFactor(root->pLeft) < EH){
             return LRRotation(pNode);
         }
         //RL Rotation
-        if(bf > RH && key < pNode->pRight->data){
+        if(bf > RH && BalanceFactor(root->pLeft) > EH){
             return RLRotation(pNode);
         }
         return pNode;
@@ -245,6 +245,7 @@ public:
     }
 
     ////////////////////////////////////
+    ///////// Exercise 3
     bool search(const T &value);
     void printInorderRec(Node* node);
     bool searchRec(Node* node, T i);

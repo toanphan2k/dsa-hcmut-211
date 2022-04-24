@@ -246,10 +246,29 @@ public:
 
     ////////////////////////////////////
     ///////// Exercise 3
-    bool search(const T &value);
-    void printInorderRec(Node* node);
-    bool searchRec(Node* node, T i);
-    void printInorder();
+    bool search(const T &value){
+        return searchRec(this->root, value);
+    }
+
+    bool searchRec(Node* pNode, T i){
+        if (!pNode) return false;
+        else if (pNode->data == i) return true;
+        else if (pNode->data > i) return searchRec(pNode->pLeft, i);
+        else return searchRec(pNode->pRight, i);
+    }
+    void printInorderRec(Node* pNode){
+        if(!pNode) return;
+
+        printInorderRec(pNode->pLeft);
+        cout << pNode->data<< " ";
+        printInorderRec(pNode->pRight);
+    }
+
+    void printInorder(){
+        printInorderRec(this->root);
+    }
+
+    void clear() {};
     ////////////////////////////////////
     class Node
     {

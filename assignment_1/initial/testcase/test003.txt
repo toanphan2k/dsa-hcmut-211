@@ -1,0 +1,7 @@
+iconst 3
+fconst 2
+imul
+top
+istore 0
+iload 0
+top

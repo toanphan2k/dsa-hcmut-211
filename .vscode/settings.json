@@ -14,6 +14,9 @@
         "sstream": "cpp",
         "streambuf": "cpp",
         "tuple": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "stack": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp"
     }
 }

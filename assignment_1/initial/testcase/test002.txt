@@ -1,0 +1,6 @@
+iconst 3
+top
+iconst 2
+top
+imul
+top

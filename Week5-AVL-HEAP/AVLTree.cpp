@@ -246,16 +246,16 @@ public:
 
     ////////////////////////////////////
     ///////// Exercise 3
-    bool search(const T &value){
-        return searchRec(this->root, value);
-    }
+    // bool search(const T &value){
+    //     return searchRec(this->root, value);
+    // }
 
-    bool searchRec(Node* pNode, T i){
-        if (!pNode) return false;
-        else if (pNode->data == i) return true;
-        else if (pNode->data > i) return searchRec(pNode->pLeft, i);
-        else return searchRec(pNode->pRight, i);
-    }
+    // bool searchRec(Node* pNode, T i){
+    //     if (!pNode) return false;
+    //     else if (pNode->data == i) return true;
+    //     else if (pNode->data > i) return searchRec(pNode->pLeft, i);
+    //     else return searchRec(pNode->pRight, i);
+    // }
     void printInorderRec(Node* pNode){
         if(!pNode) return;
 
@@ -268,6 +268,36 @@ public:
         printInorderRec(this->root);
     }
 
+    Node* search(const T &value){
+        return searchRec(this->root, value);
+    }
+
+    Node* searchRec(Node* pNode, T i){
+        if (!pNode) return NULL;
+        else if (pNode->data == i) return true;
+        else if (pNode->data > i) return searchRec(pNode->pLeft, i);
+        else return searchRec(pNode->pRight, i);
+    }
+
+    Node* searchParentRec(Node* pNode, T key, Node* parent){
+        if (pNode == NULL) return NULL;
+        if (pNode->data == key) {
+            return parent;
+        } else {
+        searchParentRec(pNode->pLeft, key, pNode);
+        searchParentRec(pNode->pRight, key, pNode);
+    }
+    }
+
+    void searchParent(T key){
+        Node* temp = searchParentRec(this->root, key, this->root);
+        if(temp == NULL) cout << "NULL\n";
+        else if (temp->data == key)  cout << "NULL\n";
+        else{
+            cout << temp->data;
+        }
+        
+    }
     void clear() {};
     ////////////////////////////////////
     class Node
@@ -304,10 +334,8 @@ int arr[] = {10,52,98,32,68,92,40,13,42,63,99,100};
 for (int i = 0; i < 12; i++){
 avl.insert(arr[i]);
 }
-for(int i = 11; i >= 0; i--){
-avl.remove(arr[i]);
-}
 avl.printTreeStructure();
+avl.searchParent(52);
 
 }
 

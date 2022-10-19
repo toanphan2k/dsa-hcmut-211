@@ -1,0 +1,8 @@
+iconst 1
+iconst 2
+iconst 3
+istore 0
+istore 2
+istore 4
+iload 0
+top

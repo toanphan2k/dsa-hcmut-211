@@ -1,0 +1,3 @@
+iconst 1
+iload 2.0
+iadd

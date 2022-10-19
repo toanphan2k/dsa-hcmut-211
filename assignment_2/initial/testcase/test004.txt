@@ -1,0 +1,3 @@
+fconst 4.0
+fconst 5.0
+iadd

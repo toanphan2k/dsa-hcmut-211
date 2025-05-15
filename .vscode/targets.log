@@ -1,4 +1,0 @@
-make.exe all -f D:\HK 211\Do an thiet ke luan ly\riscv\top_cache_axi\tb --print-data-base --no-builtin-variables --no-builtin-rules --question
-'make.exe' is not recognized as an internal or external command,
-operable program or batch file.
-

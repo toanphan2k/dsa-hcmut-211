@@ -1,1 +1,0 @@
-Triển khai hàm sumMin(int n) trong BST 
